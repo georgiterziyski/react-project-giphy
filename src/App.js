@@ -1,6 +1,9 @@
 import React from 'react';
 import Header from './components/header/Header'
 import Home from './pages/Home'
+import Favourites from './pages/Favourites'
+import Profile from './pages/Profile'
+import Login from './pages/Login'
 
 import {
   BrowserRouter as Router,
@@ -33,10 +36,24 @@ const routes =[
     </Layout>
   },
   {
-    path: '/',
-    exact: true,
+    path: '/favourites',
+    exact: false,
     main: () => <Layout>
-      <Home />
+      <Favourites />
+    </Layout>
+  },
+  {
+    path: '/profile',
+    exact: false,
+    main: () => <Layout>
+      <Profile />
+    </Layout>
+  },
+  {
+    path: '/login',
+    exact: false,
+    main: () => <Layout>
+      <Login />
     </Layout>
   }
 ]
