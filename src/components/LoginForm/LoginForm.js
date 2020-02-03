@@ -15,25 +15,25 @@ class LoginForm extends Component {
   
   render() {
     return (
-      <Form class="login-forM">
-        <h1 class="mb-5">Вход</h1>
+      <Form>
+        <h1 class="mb-5 text-uppercase">Вход</h1>
         <div class="form-group">
           <input
             id="email"
             type="text"
-            class="form-control"
+            class="form-control rounded-pill form-control-lg"
             placeholder="Email"
           ></input>
         </div>
-        <div class="form-group">
+        <div class="form-group ">
           <input
             id="password"
             type="password"
-            class="form-control"
+            class="form-control rounded-pill form-control-lg"
             placeholder="Парола"
           ></input>
         </div>
-        <button id="login-button" type="submit" class="btn">
+        <button id="login-button" type="submit" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">
           Влез
         </button>
         <p class="mt-3">

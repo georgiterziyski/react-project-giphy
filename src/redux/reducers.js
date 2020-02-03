@@ -1,8 +1,11 @@
-import {combinedReducers} from 'redux'
+import { combineReducers } from 'redux'
 import types from './action-types'
 
 function favourites(state = [], action) {
     switch (action.type) {
+        case types.SET_ALL_FAVORITES: {
+            return [...state, action.payload];
+        }
         case types.GET_ALL_FAVORITES: {
             return [...state, action.payload];
         }
@@ -44,6 +47,12 @@ function user(state = [], action) {
         case types.GET_CURRENT_USER: {
             return {...action.payload};
         }
+        case types.LOGIN: {
+            return [...state, action.payload];
+        }
+        case types.LOGOUT: {
+            return {...action.payload};
+        }
         default:
             return state;
     }
@@ -58,3 +67,21 @@ function error(state = {}, action) {
             return state;
     }
 }
+
+function search(state = [], action) {
+    switch (action.type) {
+        case types.SEARCH: {
+            return [...state, action.payload];
+        }
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({
+    favourites, 
+    favourite, 
+    user, 
+    error,
+    search
+});

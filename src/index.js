@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import './assets/styles/styles.scss';
 import Footer from './components/footer/Footer';
 import * as serviceWorker from './serviceWorker';
 

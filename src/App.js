@@ -13,10 +13,10 @@ import {
 
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-//import reducers from "./redux/reducers";
+import reducers from "./redux/reducers";
 import thunk from 'redux-thunk';
 
-//const store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(reducers, applyMiddleware(thunk));
 
 const Layout = props => (
   <>
@@ -70,11 +70,13 @@ const getRoutes = () => {
 }
 
 function App() {
-  return <Router>
-    <Switch>
-      {getRoutes()}
-    </Switch>
-  </Router>
+  return  <Provider store={store}>
+            <Router>
+              <Switch>
+                {getRoutes()}
+              </Switch>
+            </Router>
+          </Provider>
 }
 
 export default App;
