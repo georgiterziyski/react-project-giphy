@@ -8,7 +8,7 @@ class Home extends Component {
                     <img src="https://fontmeme.com/permalink/191118/4444c38a76080519f37bee751a73515e.png" class="img-fluid"></img>
                 </div>
                 <div class="form-wrapper">
-                    <form> 
+                    <form class="search"> 
                         <div class="form-row">
                             <input id="input" class="form-control" type="text" placeholder="Type to search..."></input>
                         </div>

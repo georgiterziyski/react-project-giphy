@@ -31,22 +31,23 @@ form{
   .btn-secondary{
       min-height: 48px;
   }
-  .btn-custom{
+  #login-button{
     background: #409fc1;
     border-color:#409fc1;
     color:#fff;
     font-size: 15px;
     font-weight: 600;
     min-height: 48px;
+    width: 100%;
   }
-  .btn-custom:focus,
-  .btn-custom:hover,
-  .btn-custom:active,
-  .btn-custom:active:focus{
+  #login-button:focus,
+  #login-button:hover,
+  #login-button:active,
+  #login-button:active:focus{
     background:  hsl(337, 51%, 50%);
     border-color:  hsl(337, 51%, 50%);
     color:#fff;
   }
-  .btn-custom:focus{
+  #login-button:focus{
     box-shadow: 0 0 0 0.2rem  hsl(337, 51%, 50%);
   }

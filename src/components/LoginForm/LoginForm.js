@@ -25,7 +25,7 @@ class LoginForm extends Component {
             placeholder="Email"
           ></input>
         </div>
-        <div class="form-group ">
+        <div class="form-group">
           <input
             id="password"
             type="password"
