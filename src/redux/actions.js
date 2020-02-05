@@ -5,22 +5,14 @@ export function setError (error) {
     return { type: types.SET_ERROR, payload: error };
 }
 
-export function addFavorite(favourite){
-    return {type: types.ADD_FAVORITE, payload: favourite};
+export function setGifs (data) {
+    return {type: types.SET_GIFS, payload: data}
 }
 
-export function removeFavorite(index){
-    return {type: types.REMOVE_FAVORITE, payload: index};
-}
-
-export function search (movies) {
-    return {type: types.SEARCH, payload: movies}
-}
-
-export const getgifs = params => async dispatch => {
+export const getGifs = () => async dispatch => {
     try{
-        const response = await networkClient.get(params);
-        dispatch(search(response.results));
+        const res = await networkClient.get("trending");
+        dispatch(setGifs(res.data));
     } catch (ex){
         dispatch(setError({message: 'There was an error!'}))
     }

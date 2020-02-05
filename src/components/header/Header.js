@@ -26,7 +26,7 @@ class Header extends Component {
         })
     }
     render() {
-        return  <div class="navbar-wrapper sticky-top" id="navbar-container">
+        return  <div className="navbar-wrapper sticky-top" id="navbar-container">
                     <Navbar className="navbar navbar-expand-lg navbar-dark sticky-top">
                         <Container>
                             <NavLink

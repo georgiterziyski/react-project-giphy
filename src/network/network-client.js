@@ -53,8 +53,7 @@ export default {
     );
 
     data.params = Object.assign({}, options.params, {
-      api_key: constants.apiKey,
-      limit: constants.limit
+      api_key: constants.apiKey
     });
 
     return new Promise((resolve, reject) => {

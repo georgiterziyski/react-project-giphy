@@ -6,9 +6,6 @@ function favourites(state = [], action) {
         case types.SET_ALL_FAVORITES: {
             return [...state, action.payload];
         }
-        case types.GET_ALL_FAVORITES: {
-            return [...state, action.payload];
-        }
         case types.REMOVE_ALL_FAVORITES: {
             state.splice(action.payload)
             return [...state];
@@ -44,7 +41,7 @@ function user(state = [], action) {
         case types.UPDATE_USER: {
             return [...state, action.payload];
         }
-        case types.GET_CURRENT_USER: {
+        case types.SET_CURRENT_USER: {
             return {...action.payload};
         }
         case types.LOGIN: {
@@ -68,10 +65,10 @@ function error(state = {}, action) {
     }
 }
 
-function search(state = [], action) {
+function set_gifs(state = [], action) {
     switch (action.type) {
-        case types.SEARCH: {
-            return [...state, action.payload];
+        case types.SET_GIFS: {
+            return [...action.payload];
         }
         default:
             return state;
@@ -83,5 +80,5 @@ export default combineReducers({
     favourite, 
     user, 
     error,
-    search
+    set_gifs
 });
