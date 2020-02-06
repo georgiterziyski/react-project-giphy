@@ -8,7 +8,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: ""
+      search: "",
+      icon: false
     };
   }
 
@@ -21,14 +22,31 @@ class Home extends Component {
     this.props.getGifs({});
   };
 
+  changeIcon = () =>{
+    this.setState({
+      icon: !this.state.icon
+  })
+  }
+
+  getInputClassName = () => {
+    if(!this.state.icon){
+        return 'fa-th-large';
+    }else {
+        return 'fa-bars';
+    }
+}
   onSubmit(e) {
     e.preventDefault();
     const search = this.state.search
+    if(search === ""){
+      return;
+    }
     this.props.searchGifs(search);
   }
   handleChange = e => {
+    const search = e.target.value
     this.setState({
-      search: e.target.value
+      search: search
     });
   };
   searchGifs = () => {
@@ -83,9 +101,8 @@ class Home extends Component {
                 </button>
               </div>
               <div className="col-md-3 text-align-center">
-                <label className="label-view">View: </label>
-                <button type="button" className="btn-view">
-                  <div id="view">Grid</div>
+                <button type="button" className="btn-view" onClick={this.changeIcon}>
+                  <i className={"fa "+this.getInputClassName()+" fa-2x"}></i>
                 </button>
               </div>
             </div>

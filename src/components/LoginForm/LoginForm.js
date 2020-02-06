@@ -37,7 +37,7 @@ class LoginForm extends Component {
           Влез
         </button>
         <p class="mt-3">
-          Нямаш акаунт?{" "}
+          Нямаш акаунт?
           <a href="#">
             <strong>Регистрирай се!</strong>
           </a>

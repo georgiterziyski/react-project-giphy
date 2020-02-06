@@ -33,7 +33,7 @@ class Header extends Component {
                                 tag={RRNavLink}
                                 className="navbar-brand"
                                 exact to="/">
-                                <i className="fa fa-cubes mr-3"></i>
+                                <i className="fa fa-stack-overflow mr-3" aria-hidden="true"></i>
                                 <span className="project-name">GIPHY App</span>
                             </NavLink>
                             <NavbarToggler onClick={this.toggleIsOpen}/>

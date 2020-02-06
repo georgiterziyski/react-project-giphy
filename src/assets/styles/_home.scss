@@ -16,6 +16,7 @@
 	border: 1px solid white;
 	color: white;
 	width: 3rem;
+	height: 36px;
 }
 .btn-view:hover{
 	color: black;
@@ -48,6 +49,7 @@ h1{
 }
 .col-md-3{
 	text-align: center;
+	padding-left: 48px;;
 }
 .search{
 	border-bottom: solid 1px #409fc1;
@@ -60,4 +62,7 @@ h1{
 .form-row2{
 	display: flex;
 	justify-content: space-around;
+}
+.fa-align-justify{
+	font-size: 20px;
 }
