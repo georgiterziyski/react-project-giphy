@@ -22,29 +22,37 @@ class Home extends Component {
     this.props.getGifs({});
   };
 
-  changeIcon = () =>{
+  changeIcon = () => {
     this.setState({
       icon: !this.state.icon
-  })
-  }
+    });
+    this.changeView(this.state.icon);
+  };
 
-  getInputClassName = () => {
-    if(!this.state.icon){
-        return 'fa-th-large';
-    }else {
-        return 'fa-bars';
+  changeView = view => {
+    if (!view) {
+
+    } else {
+
     }
-}
+  }
+  getInputClassName = () => {
+    if (!this.state.icon) {
+      return "fa-th-large";
+    } else {
+      return "fa-bars";
+    }
+  };
   onSubmit(e) {
     e.preventDefault();
-    const search = this.state.search
-    if(search === ""){
+    const search = this.state.search;
+    if (search === "") {
       return;
     }
     this.props.searchGifs(search);
   }
   handleChange = e => {
-    const search = e.target.value
+    const search = e.target.value;
     this.setState({
       search: search
     });
@@ -92,24 +100,26 @@ class Home extends Component {
             </div>
             <div className="form-row2">
               <div className="col-md-3">
-                <button
-                  id="button"
-                  className="btn"
-                  type="submit"
-                >
+                <button id="button" className="btn" type="submit">
                   Search
                 </button>
               </div>
               <div className="col-md-3 text-align-center">
-                <button type="button" className="btn-view" onClick={this.changeIcon}>
-                  <i className={"fa "+this.getInputClassName()+" fa-2x"}></i>
+                <button
+                  type="button"
+                  className="btn-view"
+                  onClick={this.changeIcon}
+                >
+                  <i
+                    className={"fa " + this.getInputClassName() + " fa-2x"}
+                  ></i>
                 </button>
               </div>
             </div>
           </form>
         </div>
         <div id="result">
-            <div className="col-md-6">{this.getGifList()}</div>
+          <div className="col-md-6">{this.getGifList()}</div>
         </div>
       </div>
     );
