@@ -4,7 +4,7 @@
 @import "~bootstrap/scss/mixins";
 
 // Customize Bootstrap Variables
-@import "./variables";
+//import "./variables";
 
 
 // Import custom font from Google
@@ -19,6 +19,7 @@
 @import "./bootstrap_components/footer";
 @import "./login.scss";
 @import "./home";
+@import "./gif";
 
 // Basic page look
 @import "./theme";

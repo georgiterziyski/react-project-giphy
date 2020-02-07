@@ -9,7 +9,7 @@ class Home extends Component {
     super(props);
     this.state = {
       search: "",
-      icon: false
+      isToggled: false
     };
   }
 
@@ -19,14 +19,14 @@ class Home extends Component {
   }
 
   findTrendingGifs = () => {
-    this.props.getGifs({});
+    this.props.getGifs();
   };
 
   changeIcon = () => {
     this.setState({
-      icon: !this.state.icon
+      isToggled: !this.state.isToggled
     });
-    this.changeView(this.state.icon);
+    this.changeView(this.state.isToggled);
   };
 
   changeView = view => {
@@ -37,7 +37,7 @@ class Home extends Component {
     }
   }
   getInputClassName = () => {
-    if (!this.state.icon) {
+    if (!this.state.isToggled) {
       return "fa-th-large";
     } else {
       return "fa-bars";
@@ -50,6 +50,10 @@ class Home extends Component {
       return;
     }
     this.props.searchGifs(search);
+    this.setState({
+      search: ""
+    })
+    e.target.value = ""
   }
   handleChange = e => {
     const search = e.target.value;
@@ -66,6 +70,7 @@ class Home extends Component {
     const gifList = this.props.set_gifs.map(data => {
       return (
         <Gif
+          isToggled={this.state.isToggled}
           key={data.id}
           src={data.images.original.url}
           title={data.title}
@@ -119,7 +124,7 @@ class Home extends Component {
           </form>
         </div>
         <div id="result">
-          <div className="col-md-6">{this.getGifList()}</div>
+          {this.getGifList()}
         </div>
       </div>
     );
