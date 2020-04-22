@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import types from './action-types'
 
-function favourites(state = [], action) {
+function gifs(state = [], action) {
     switch (action.type) {
-        case types.SET_ALL_FAVORITES: {
-            return [...state, action.payload];
+        case types.SET_FAVOURITES: {
+            return [...action.payload];
         }
-        case types.REMOVE_ALL_FAVORITES: {
+        case types.REMOVE_FAVOURITES: {
             state.splice(action.payload)
             return [...state];
         }
@@ -76,8 +76,9 @@ function set_gifs(state = [], action) {
 }
 
 export default combineReducers({
-    favourites, 
-    favourite, 
+//    favourites, 
+    favourite,
+    gifs, 
     user, 
     error,
     set_gifs
