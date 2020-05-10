@@ -1,54 +1,20 @@
 import { combineReducers } from 'redux'
 import types from './action-types'
 
-function gifs(state = [], action) {
+function favourites(state = [], action) {
     switch (action.type) {
         case types.SET_FAVOURITES: {
             return [...action.payload];
         }
-        case types.REMOVE_FAVOURITES: {
-            state.splice(action.payload)
-            return [...state];
-        }
         default:
             return state;
     }
 }
 
-function favourite(state = [], action) {
+function gifs(state = [], action) {
     switch (action.type) {
-        case types.ADD_FAVORITE: {
-            return [...state, action.payload];
-        }
-        case types.REMOVE_FAVORITE: {
-            state.splice(action.payload, 1)
-            return [...state];
-        }
-        default:
-            return state;
-    }
-}
-
-function user(state = [], action) {
-    switch (action.type) {
-        case types.REGISTER_USER: {
-            return [...state, action.payload];
-        }
-        case types.DELETE_USER: {
-            state.splice(action.payload, 1)
-            return [...state];
-        }
-        case types.UPDATE_USER: {
-            return [...state, action.payload];
-        }
-        case types.SET_CURRENT_USER: {
-            return {...action.payload};
-        }
-        case types.LOGIN: {
-            return [...state, action.payload];
-        }
-        case types.LOGOUT: {
-            return {...action.payload};
+        case types.SET_GIFS: {
+            return [...action.payload];
         }
         default:
             return state;
@@ -65,10 +31,10 @@ function error(state = {}, action) {
     }
 }
 
-function set_gifs(state = [], action) {
+function currentUser(state = {}, action) {
     switch (action.type) {
-        case types.SET_GIFS: {
-            return [...action.payload];
+        case types.SET_USER: {
+            return {...action.payload};
         }
         default:
             return state;
@@ -76,10 +42,8 @@ function set_gifs(state = [], action) {
 }
 
 export default combineReducers({
-//    favourites, 
-    favourite,
-    gifs, 
-    user, 
+    favourites,
+    gifs,
     error,
-    set_gifs
+    currentUser,
 });

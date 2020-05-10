@@ -6,8 +6,8 @@ export function setError (error) {
     return { type: types.SET_ERROR, payload: error };
 }
 
-export function setGifs (data) {
-    return {type: types.SET_GIFS, payload: data}
+export function setGifs (gif) {
+    return {type: types.SET_GIFS, payload: gif}
 }
 
 export const getGifs = () => async dispatch => {
@@ -41,11 +41,20 @@ export const getFavourites = (responseFields = "_id") => async dispatch => {
     }
 };
 
-export const addFavourite = (variables, responseFields = "_id") => async dispatch => {
+export function addGif (game) {
+    return {type: types.ADD_GIF, payload: game}
+}
+
+export const addGifToUser = (variables, responseFields = "_id") => async dispatch => {
     try {
         const response = await graphQLService.addGif(variables, responseFields);
-        //dispatch(addGameToStore(response.data.addGame));
+        //dispatch(saveCurrentUser(response.data.editUser));
+        dispatch(addGif(response.data.addGif));
     } catch(ex) {
         dispatch(setError({message: 'There was an error!'}))
     }
 };
+
+export function saveCurrentUser(user){
+    return {type: types.SET_USER, payload: user}
+}

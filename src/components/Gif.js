@@ -1,26 +1,36 @@
-import React, { Component } from "react";
+import React from "react";
+import {useDispatch} from 'react-redux';
+import {addGifToUser} from '../redux/actions';
 
-class Gif extends Component {
+const Gif = props => {
 
-  changeView = () => {
-    if (!this.props.isToggled) {
+  const dispatch = useDispatch();
+
+  const changeView = () => {
+    if (!props.isToggled) {
       return "card";
     } else {
       return "media";
     }
-  };
-  render() {
-    return (
-            <div className={this.changeView() + ` mb-3 `}>
-              <div className={this.changeView() + `-header`}>
-                {this.props.title}
+  }
+
+  const dispatchAddGifToUser = () => {
+    const title = props.gif.title;
+    const imageUrl = props.gif.images.original.url;
+    dispatch(addGifToUser({
+      title,
+      imageUrl
+    }, `_id title imageUrl`));
+  }
+    return <div className={changeView() + ` mb-3 `}>
+              <div className={changeView() + `-header`}>
+                {props.gif.title}
               </div>
-              <div className={this.changeView() + `-body`}>
-                <img className={this.changeView() + `-img`} src={this.props.src} alt={this.props.title}></img>
+              <div className={changeView() + `-body`}>
+                <button type="button" className="btn" onClick={dispatchAddGifToUser}>Добави в любими</button>
+                <img className={changeView() + `-img`} src={props.gif.images.original.url} alt={props.gif.title}></img>
               </div>
             </div>
-    );
-  }
 }
 
 export default Gif;

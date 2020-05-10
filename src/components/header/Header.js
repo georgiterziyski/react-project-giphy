@@ -11,6 +11,10 @@ import {
 
 import { NavLink as RRNavLink } from 'react-router-dom'
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as actions from "../../redux/actions";
+
 class Header extends Component {
 
     constructor(props) {

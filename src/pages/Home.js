@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../redux/actions";
 class Home extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -26,16 +27,8 @@ class Home extends Component {
     this.setState({
       isToggled: !this.state.isToggled
     });
-    this.changeView(this.state.isToggled);
   };
 
-  changeView = view => {
-    if (!view) {
-
-    } else {
-
-    }
-  }
   getInputClassName = () => {
     if (!this.state.isToggled) {
       return "fa-th-large";
@@ -43,6 +36,7 @@ class Home extends Component {
       return "fa-bars";
     }
   };
+
   onSubmit(e) {
     e.preventDefault();
     const search = this.state.search;
@@ -67,16 +61,12 @@ class Home extends Component {
   };
 
   getGifList = () => {
-    const gifList = this.props.set_gifs.map(data => {
-      return (
-        <Gif
+    const gifList = this.props.gifs.map(gif => {
+      return <Gif
           isToggled={this.state.isToggled}
-          key={data.id}
-          src={data.images.original.url}
-          title={data.title}
-          id={data.id}
+          key={gif.id}
+          gif={gif}
         />
-      );
     });
     return gifList;
   };
@@ -133,7 +123,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    set_gifs: state.set_gifs
+    gifs: state.gifs
   };
 };
 

@@ -9,7 +9,7 @@ class Favourites extends Component {
         this.props.getFavourites('_id title imageUrl')
     }
     renderGifs = () => {
-        const gifList = this.props.gifs.map((gif, index) => {
+        const gifList = this.props.favourites.map((gif, index) => {
             return  <div key={gif._id} className="col-md-3">
                 <div className="card">
                     <img src={gif.imageUrl} className="card-img-top"/>
@@ -22,7 +22,7 @@ class Favourites extends Component {
         return gifList;
     }
     render() {
-        return <div className="row">
+        return <div className="col-md-3">
             {this.renderGifs()}
         </div>
     }
@@ -30,7 +30,7 @@ class Favourites extends Component {
 
 const mapStateToProps = state => {
     return {
-        gifs: state.gifs
+        favourites: state.favourites
     }
 }
 
