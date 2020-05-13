@@ -33,7 +33,7 @@ export default {
     async deleteGif(variables, responseFields){
         const response = await graphQLClient.mutate({
             mutation: gql `mutation($_id: String!){
-                deleteGame(_id: $_id){
+                deleteGif(_id: $_id){
                     ${responseFields}
                 }
             }`,

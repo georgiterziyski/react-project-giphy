@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as actions from "../redux/actions";
+import FavouriteGif from "../components/FavouriteGif";
 
 class Favourites extends Component {
 
@@ -9,15 +10,11 @@ class Favourites extends Component {
         this.props.getFavourites('_id title imageUrl')
     }
     renderGifs = () => {
-        const gifList = this.props.favourites.map((gif, index) => {
-            return  <div key={gif._id} className="col-md-3">
-                <div className="card">
-                    <img src={gif.imageUrl} className="card-img-top"/>
-                    <div className="card-body">
-                        <h5 className="card-title">{gif.title}</h5>
-                    </div>
-                </div>
-            </div>
+        const gifList = this.props.favourites.map(gif => {
+            return <FavouriteGif
+            key={gif.id}
+            gif={gif}
+          />
         })
         return gifList;
     }

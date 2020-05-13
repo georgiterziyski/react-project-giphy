@@ -41,20 +41,90 @@ export const getFavourites = (responseFields = "_id") => async dispatch => {
     }
 };
 
-export function addGif (game) {
-    return {type: types.ADD_GIF, payload: game}
+export function addGif (gif) {
+    return {type: types.ADD_GIF, payload: gif}
 }
 
 export const addGifToUser = (variables, responseFields = "_id") => async dispatch => {
     try {
         const response = await graphQLService.addGif(variables, responseFields);
-        //dispatch(saveCurrentUser(response.data.editUser));
+        dispatch(saveCurrentUser(response.data.editUser));
         dispatch(addGif(response.data.addGif));
     } catch(ex) {
         dispatch(setError({message: 'There was an error!'}))
     }
 };
 
+export function deleteGifFromUser (gif) {
+    return {type: types.DELETE_GIF, payload: gif}
+}
+
+export const deleteGif = (variables, responseFields = "_id") => async dispatch => {
+    try {
+        const response = await graphQLService.deleteGif(variables, responseFields);
+        dispatch(deleteGifFromUser(response.data.deleteGif._id));
+    } catch(ex) {
+        dispatch(setError({message: 'There was an error!'}))
+    }
+};
+
+////////////////////////////////////////////////
+export const addUser = variables => async dispatch => {
+    try {
+        const response = await graphQLService.addUser(variables);
+        dispatch(getCurrentUser());
+        dispatch(saveToken(response.data.addUser));
+    } catch(e){
+        e.graphQLErrors.forEach(error => {
+            console.log(error)
+        })
+        dispatch(setGraphQLError({request: "addUser", errors: []}))
+    }
+}
+
+export const editUser = (variables, responseFields = "_id firstName lastName email userType") => async dispatch => {
+    try {
+        const response = await graphQLService.editUser(variables, responseFields);
+        dispatch(getCurrentUser());
+    } catch(e){
+        console.log(e);
+        dispatch(setGraphQLError({request: "editUser", errors: []}))
+    }
+}
+
+export const login = variables => async dispatch => {
+    try {
+        const response = await graphQLService.login(variables);
+        dispatch(getCurrentUser());
+        dispatch(saveToken(response.data.login));
+    } catch(e){
+        console.log(e);
+        dispatch(setGraphQLError({request: "login", errors: []}))
+    }
+}
+export const getCurrentUser = () => async dispatch => {
+    try {
+        const response = await graphQLService.currentUser();
+        dispatch(saveCurrentUser(response.data.currentUser));
+        dispatch(setUserLoaded())
+    } catch(e){
+        dispatch(saveToken(''));
+        dispatch(setUserLoaded())
+    }
+}
+
 export function saveCurrentUser(user){
     return {type: types.SET_USER, payload: user}
+}
+
+export function saveToken(token){
+    return {type: types.SAVE_TOKEN, payload: token}
+}
+
+export function setUserLoaded(){
+    return {type: types.SET_USER_LOADED, payload: true}
+}
+
+export function setGraphQLError (error) {
+    return { type: types.ADD_GRAPHQL_ERROR, payload: error };
 }
