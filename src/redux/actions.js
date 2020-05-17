@@ -47,9 +47,9 @@ export function addGif (gif) {
 
 export const addGifToUser = (variables, responseFields = "_id") => async dispatch => {
     try {
-        const response = await graphQLService.addGif(variables, responseFields);
+        const response = await graphQLService.editUser(variables, responseFields);
         dispatch(saveCurrentUser(response.data.editUser));
-        dispatch(addGif(response.data.addGif));
+        //dispatch(addGif(response.data.addGif));
     } catch(ex) {
         dispatch(setError({message: 'There was an error!'}))
     }
@@ -69,6 +69,7 @@ export const deleteGif = (variables, responseFields = "_id") => async dispatch =
 };
 
 ////////////////////////////////////////////////
+
 export const addUser = variables => async dispatch => {
     try {
         const response = await graphQLService.addUser(variables);
@@ -82,9 +83,23 @@ export const addUser = variables => async dispatch => {
     }
 }
 
-export const editUser = (variables, responseFields = "_id firstName lastName email userType") => async dispatch => {
+export const login = variables => async dispatch => {
     try {
-        const response = await graphQLService.editUser(variables, responseFields);
+        const response = await graphQLService.login(variables);
+        debugger
+        dispatch(saveToken(response.data.login));
+        dispatch(getCurrentUser());
+    } catch(e){
+        e.graphQLErrors.forEach(error => {
+        console.log(error)
+    })
+        dispatch(setGraphQLError({request: "login", errors: []}))
+    }
+}
+
+export const editUser = (variables, responseFields = "_id firstName lastName email userType, gifs") => async dispatch => {
+    try {
+        graphQLService.editUser(variables, responseFields);
         dispatch(getCurrentUser());
     } catch(e){
         console.log(e);
@@ -92,16 +107,11 @@ export const editUser = (variables, responseFields = "_id firstName lastName ema
     }
 }
 
-export const login = variables => async dispatch => {
-    try {
-        const response = await graphQLService.login(variables);
-        dispatch(getCurrentUser());
-        dispatch(saveToken(response.data.login));
-    } catch(e){
-        console.log(e);
-        dispatch(setGraphQLError({request: "login", errors: []}))
-    }
+export const logout = () => async dispatch => {
+    dispatch(deleteToken());
+    dispatch(saveCurrentUser(null));
 }
+
 export const getCurrentUser = () => async dispatch => {
     try {
         const response = await graphQLService.currentUser();
@@ -119,6 +129,10 @@ export function saveCurrentUser(user){
 
 export function saveToken(token){
     return {type: types.SAVE_TOKEN, payload: token}
+}
+
+export function deleteToken(token){
+    return {type: types.DELETE_TOKEN, payload: true}
 }
 
 export function setUserLoaded(){

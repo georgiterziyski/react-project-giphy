@@ -1,9 +1,19 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {logout} from '../redux/actions';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import { NavLink, NavItem } from 'reactstrap';
+
 const UserMenu = () => {
+
     const currentUser = useSelector(state => state.currentUser);
+
+    const dispatch = useDispatch();
+
+    const dispatchLogout = () => {
+        dispatch(logout());
+    }
     return <> <NavItem> 
             <NavLink
                 tag={RRNavLink}
@@ -23,14 +33,11 @@ const UserMenu = () => {
                 </div>
             </NavLink>
         </NavItem>
-        <NavItem>
-            <NavLink
-                tag={RRNavLink}
-                exact to="/logout"
-                activeClassName="active">
-                Log out
-            </NavLink>
-        </NavItem>
+        <div className="ml-3">
+            <button id="logout-button" type="button" onClick={dispatchLogout} className="btn">
+                <i className="fa fa-sign-out" aria-hidden="true"></i>
+            </button>
+        </div>
     </>
 }
 

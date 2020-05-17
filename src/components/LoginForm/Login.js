@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { NavLink, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import LoginForm from './LoginForm';
 
 const Login = (props) => {
@@ -13,7 +13,7 @@ const Login = (props) => {
 
   return (
     <div className="d-flex align-items-center ml-2">
-      <Button type="button" color="" onClick={toggle}>{buttonLabel}</Button>
+      <NavLink type="button" color="" onClick={toggle}>{buttonLabel}</NavLink>
       <Modal isOpen={modal} toggle={toggle} >
         <ModalHeader margin="0"toggle={toggle}>Влез</ModalHeader>
         <ModalBody>

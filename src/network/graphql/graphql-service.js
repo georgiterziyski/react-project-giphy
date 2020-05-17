@@ -71,8 +71,7 @@ export default {
                     currentUser {
                         ${responseFields}
                     }
-                }
-            `
+                }`                
         })
         return response;
     },
@@ -80,8 +79,8 @@ export default {
     async editUser(variables, responseFields){
         const response = await graphQLClient.mutate({
             mutation: gql `
-            mutation($_id: String!, $username: String!, $email: String!, $password: String!){
-               editUser(_id: $_id, username: $username, email: $email, password: $password){
+            mutation($_id: String!, $username: String!, $email: String!, $password: String!, $gifs: [GifInput]!){
+               editUser(_id: $_id, username: $username, email: $email, password: $password, gifs: $gifs){
                     ${responseFields}
                }
            }`,

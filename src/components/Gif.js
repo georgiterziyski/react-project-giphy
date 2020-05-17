@@ -1,9 +1,10 @@
 import React from "react";
 import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {addGifToUser} from '../redux/actions';
 
 const Gif = props => {
-
+  const currentUserId = useSelector(state => state.currentUser._id);
   const dispatch = useDispatch();
 
   const changeView = () => {
@@ -15,11 +16,11 @@ const Gif = props => {
   }
 
   const dispatchAddGifToUser = () => {
-    const title = props.gif.title;
-    const imageUrl = props.gif.images.original.url;
+    const gifToAdd = Object.assign({}, props.gif);
+    delete gifToAdd.__typename;
     dispatch(addGifToUser({
-      title,
-      imageUrl
+      _id: currentUserId,
+      gifs: [gifToAdd],
     }, `_id title imageUrl`));
   }
     return <div className={changeView() + ` mb-3 `}>

@@ -55,6 +55,10 @@ function token(state = localStorage.getItem('token') ? localStorage.getItem('tok
             localStorage.setItem('token', action.payload);
             return action.payload
         }
+        case types.DELETE_TOKEN: {
+            localStorage.removeItem('token');
+            return action.payload
+        }
         default:
             return state;
     }
