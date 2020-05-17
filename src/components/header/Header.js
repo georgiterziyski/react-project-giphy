@@ -14,13 +14,16 @@ import { NavLink as RRNavLink } from 'react-router-dom'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../../redux/actions";
+import UserMenu from '../UserMenu';
+import Login from '../LoginForm/Login';
 
 class Header extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isUserLoggedIn: this.props.token
         }
     }
 
@@ -29,6 +32,11 @@ class Header extends Component {
             isOpen: !this.state.isOpen
         })
     }
+
+    componentDidMount = () => {
+        this.props.getCurrentUser();
+    }
+
     render() {
         return  <div className="navbar-wrapper sticky-top" id="navbar-container">
                     <Navbar className="navbar navbar-expand-lg navbar-dark sticky-top">
@@ -51,7 +59,8 @@ class Header extends Component {
                                             Home
                                         </NavLink>
                                     </NavItem>
-                                    <NavItem>
+                                    
+                                    {/* <NavItem>
                                         <NavLink
                                             tag={RRNavLink}
                                             exact to="/favourites"
@@ -67,15 +76,25 @@ class Header extends Component {
                                             Profile
                                         </NavLink>
                                     </NavItem>
+                                    
                                     <NavItem>
                                         <NavLink
                                             tag={RRNavLink}
-                                            exact 
-                                            to="/login"
+                                            exact to="/login"
                                             activeClassName="active">
                                             Login
                                         </NavLink>
-                                    </NavItem>
+                                    </NavItem> */}
+                                    {this.state.isUserLoggedIn ? (
+                                        <UserMenu/>
+                                    ) : (
+                                        <>
+                                            <NavItem>
+                                                <Login buttonLabel="Влез"/>
+                                            </NavItem>
+                                        </>
+                                    )}
+
                                 </Nav>
                             </Collapse>
                         </Container>
@@ -84,4 +103,16 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+    }
+};
+
+const mapStateToDispatch = dispatch => {
+    return bindActionCreators({
+        getCurrentUser: actions.getCurrentUser,
+    }, dispatch)
+};
+
+export default connect(mapStateToProps, mapStateToDispatch)(Header);

@@ -12,7 +12,7 @@ class Favourites extends Component {
     renderGifs = () => {
         const gifList = this.props.favourites.map(gif => {
             return <FavouriteGif
-            key={gif.id}
+            key={gif._id}
             gif={gif}
           />
         })

@@ -1,49 +1,53 @@
-import React, { Component } from 'react'
-import { Modal } from 'reactstrap'
+import React, { useState } from 'react'
+import {useDispatch} from 'react-redux';
+import {addUser} from '../../redux/actions';
 
-export default class RegisterModal extends Component {
-    render() {
-        return  <Modal class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Регистрaция</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="register-form" action="registerUser" method="POST">
-                                    <div class="form-group">
-                                        <label for="registerEmail">Email</label> <input name="email"
-                                            type="email" class="form-control" id="registerEmail"
-                                            placeholder="Въведи email"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="registerUsername">Потребителско име</label> <input
-                                            name="username" type="text" class="form-control"
-                                            id="registerUsername" placeholder="Въведи потребителско име"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="registerPassword">Парола</label> <input
-                                            name="password" type="password" class="form-control"
-                                            id="registerPassword" placeholder="Въведи парола"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="repeatPassword ">Повтори паролата</label> <input
-                                            type="password" class="form-control" id="repeatPassword"
-                                            placeholder="Повтори паролата"></input>
-                                    </div>
-                                </form>
+const RegisterForm = () => {
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-dismiss="modal">Откажи</button>
-                                <button id="confirm-register" type="button" class="btn btn-custom">Напред</button>
-                            </div>
-                        </div>
-                    </div>
-                </Modal>
+    const dispatch = useDispatch();
+
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const dispatchAddUser = () => {
+        dispatch(addUser({
+            username,
+            email,
+            userType: 'regular',
+            password,
+        }));
     }
-}
+        return <form>
+        <div className="form-group">
+            <label htmlFor="user-name">Потребителско име</label>
+            <input 
+                type="text"
+                className="form-control"
+                onChange={e => setUsername(e.target.value)}
+                id="user-name" 
+                placeholder="Въведи потребителско име"/>
+        </div>
+        <div className="form-group">
+            <label htmlFor="register-email">Email</label>
+            <input 
+                type="text" 
+                className="form-control" 
+                onChange={e => setEmail(e.target.value)}
+                id="register-email"
+                placeholder="Въведи email"/>
+        </div>
+        <div className="form-group">
+            <label htmlFor="register-password">Парола</label>
+            <input 
+                type="password" 
+                className="form-control" 
+                onChange={e => setPassword(e.target.value)}
+                id="register-password" 
+                placeholder="Въведи парола"/>
+        </div>
+        <button type="button" className="btn" onClick={dispatchAddUser}>Регистрирай се!</button>
+    </form>
+    }
+
+    export default RegisterForm;

@@ -1,50 +1,50 @@
-import React, { Component } from "react";
-import { Form } from "reactstrap";
-import RegisterModal from "../RegisterModal/RegisterModal";
+import React, { useState } from "react";
+import {useDispatch} from 'react-redux';
+import {login} from '../../redux/actions';
+import Register from "../RegisterModal/Register";
 
-class LoginForm extends Component {
+const LoginForm = () => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: ""
-    };
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatchLogin = () => {
+      dispatch(login({
+          email,
+          password,
+      }));
   }
 
   
-  render() {
-    return (
-      <Form>
-        <h1 class="mb-5 text-uppercase">Вход</h1>
-        <div class="form-group">
+    return <form>
+        <h1 className="mb-5 text-uppercase align-text-center">Вход</h1>
+        <div className="form-group">
           <input
             id="email"
             type="text"
-            class="form-control rounded-pill form-control-lg"
+            className="form-control rounded-pill form-control-lg"
             placeholder="Email"
+            onChange={e => setEmail(e.target.value)}
           ></input>
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <input
             id="password"
             type="password"
-            class="form-control rounded-pill form-control-lg"
+            className="form-control rounded-pill form-control-lg"
             placeholder="Парола"
+            onChange={e => setPassword(e.target.value)}
           ></input>
         </div>
-        <button id="login-button" type="submit" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">
+        <button id="login-button" onClick={dispatchLogin} className="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">
           Влез
         </button>
-        <p class="mt-3">
-          Нямаш акаунт?
-          <a href="#">
-            <strong>Регистрирай се!</strong>
-          </a>
-        </p>
-      </Form>
-    );
-  }
+        <div className="align-text-center">
+        <h5 className="mt-5">Нямаш акаунт?</h5>
+        <Register buttonLabel="Регистрирай се!"/>
+        </div>
+      </form>
 }
 
 export default LoginForm;
