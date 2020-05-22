@@ -13,9 +13,9 @@ const Register = (props) => {
   const toggle = () => setModal(!modal);
 
   return (
-    <div className="d-flex align-items-center ml-2">
+    <div className="mt-3">
       <Button color="" onClick={toggle} className="btn-sm">{buttonLabel}</Button>
-      <Modal isOpen={modal} toggle={toggle} >
+      <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Register User</ModalHeader>
         <ModalBody>
             <RegisterForm/>

@@ -17,6 +17,7 @@ const ProfileForm = () => {
             _id: currentUser._id,
             username,
             password,
+            email: currentUser.email,
             gifs: currentUser.gifs
         }));
     }

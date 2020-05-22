@@ -12,7 +12,7 @@ const Login = (props) => {
   const toggle = () => setModal(!modal);
 
   return (
-    <div className="d-flex align-items-center ml-2">
+    <div>
       <NavLink type="button" color="" onClick={toggle}>{buttonLabel}</NavLink>
       <Modal isOpen={modal} toggle={toggle} >
         <ModalHeader margin="0"toggle={toggle}>Влез</ModalHeader>

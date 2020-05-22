@@ -64,7 +64,7 @@ export default {
         return response;
     },
 
-    async currentUser(responseFields = "_id username email userType"){
+    async currentUser(responseFields = "_id username email password userType gifs {_id, imageUrl, title}"){
         const response = await graphQLClient.query({
             query: gql `
                 query {
