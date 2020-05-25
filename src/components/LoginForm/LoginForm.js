@@ -3,21 +3,25 @@ import {useDispatch} from 'react-redux';
 import {login} from '../../redux/actions';
 import Register from "../RegisterModal/Register";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
 
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const dispatchLogin = () => {
-      dispatch(login({
+
+  const dispatchLogin = async () => {
+
+      await dispatch (login({
           email,
           password,
-      }));
+      }));      
+      props.setModal(false);
+      window.location = "/";
   }
 
   
-    return <form>
+    return <form >
         <h1 className="mb-5 text-uppercase align-text-center">Вход</h1>
         <div className="form-group">
           <input

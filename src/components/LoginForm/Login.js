@@ -17,7 +17,7 @@ const Login = (props) => {
       <Modal isOpen={modal} toggle={toggle} >
         <ModalHeader margin="0"toggle={toggle}>Влез</ModalHeader>
         <ModalBody>
-            <LoginForm/>
+            <LoginForm setModal={setModal}/>
         </ModalBody>
       </Modal>
     </div>

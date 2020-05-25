@@ -86,7 +86,6 @@ export const addUser = variables => async dispatch => {
 export const login = variables => async dispatch => {
     try {
         const response = await graphQLService.login(variables);
-        debugger
         dispatch(saveToken(response.data.login));
         dispatch(getCurrentUser());
     } catch(e){
