@@ -109,6 +109,7 @@ export const editUser = (variables, responseFields = "_id username email userTyp
 export const logout = () => async dispatch => {
     dispatch(deleteToken());
     dispatch(saveCurrentUser(null));
+    graphQLService.logout();
 }
 
 export const getCurrentUser = () => async dispatch => {

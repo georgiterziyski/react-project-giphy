@@ -44,6 +44,11 @@ export default {
 
     //############## User related #################
 
+    async logout(){
+        debugger
+        graphQLClient.clearStore();
+    },
+
     async addUser(variables){
         const response = await graphQLClient.mutate({
             mutation: gql `mutation($username: String!, $email: String!, $userType: String!, $password: String!){
@@ -79,7 +84,7 @@ export default {
     async editUser(variables, responseFields){
         const response = await graphQLClient.mutate({
             mutation: gql `
-            mutation($_id: String!, $username: String!, $email: String!, $password: String!, $gifs: [GifInput]!){
+            mutation($_id: String!, $username: String!, $email: String!, $password: String!, $gifs: {_id, title, imageUrl}!){
                editUser(_id: $_id, username: $username, email: $email, password: $password, gifs: $gifs){
                     ${responseFields}
                }
