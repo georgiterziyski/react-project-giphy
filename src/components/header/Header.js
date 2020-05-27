@@ -16,6 +16,7 @@ import { bindActionCreators } from "redux";
 import * as actions from "../../redux/actions";
 import UserMenu from '../UserMenu';
 import Login from '../LoginForm/Login';
+import Register from '../RegisterModal/Register';
 
 class Header extends Component {
 
@@ -92,6 +93,9 @@ class Header extends Component {
                                             <NavItem>
                                                 <Login buttonLabel="Влез"/>
                                             </NavItem>
+                                            <div className="ml-3 mb-3 d-flex align-items-center">
+                                            <   Register buttonLabel="Регистрация"/>
+                                            </div>
                                         </>
                                     )}
 

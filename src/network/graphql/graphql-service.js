@@ -45,7 +45,6 @@ export default {
     //############## User related #################
 
     async logout(){
-        debugger
         graphQLClient.clearStore();
     },
 

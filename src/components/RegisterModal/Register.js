@@ -1,4 +1,3 @@
-/* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -16,9 +15,9 @@ const Register = (props) => {
     <div className="mt-3">
       <Button color="" onClick={toggle} className="btn-sm">{buttonLabel}</Button>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Register User</ModalHeader>
+        <ModalHeader toggle={toggle}>Регистрирай потребител</ModalHeader>
         <ModalBody>
-            <RegisterForm/>
+            <RegisterForm setModal={setModal}/>
         </ModalBody>
       </Modal>
     </div>

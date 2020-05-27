@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {addGifToUser} from '../redux/actions';
 
 const Gif = props => {
-  const currentUserId = useSelector(state => state.currentUser._id);
+  const currentUser = useSelector(state => state.currentUser);
   const dispatch = useDispatch();
 
   const changeView = () => {
@@ -16,19 +16,24 @@ const Gif = props => {
   }
 
   const dispatchAddGifToUser = () => {
-    const gifToAdd = Object.assign({}, props.gif);
-    delete gifToAdd.__typename;
+    const _id = props.gif.id;
+    const title = props.gif.title;
+    const imageUrl = props.gif.url;
+    debugger
     dispatch(addGifToUser({
-      _id: currentUserId,
-      gifs: [gifToAdd],
-    }, `_id title imageUrl`));
+      _id: currentUser._id,
+      email: currentUser.email,
+      username: currentUser.username,
+      password: currentUser.password,
+      gifs: {_id, title, imageUrl},
+    }));
   }
     return <div className={changeView() + ` mb-3 `}>
               <div className={changeView() + `-header`}>
                 {props.gif.title}
               </div>
               <div className={changeView() + `-body`}>
-                <button type="button" className="btn" onClick={dispatchAddGifToUser}>Добави в любими</button>
+                {currentUser._id ? (<button type="button" className="btn" onClick={dispatchAddGifToUser}>Добави в любими</button>): (<div/>)}
                 <img className={changeView() + `-img`} src={props.gif.images.original.url} alt={props.gif.title}></img>
               </div>
             </div>

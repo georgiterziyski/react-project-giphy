@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {useDispatch} from 'react-redux';
 import {login} from '../../redux/actions';
-import Register from "../RegisterModal/Register";
 
 const LoginForm = (props) => {
 
@@ -44,10 +43,6 @@ const LoginForm = (props) => {
         <button id="login-button" type="button" onClick={dispatchLogin} className="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">
           Влез
         </button>
-        <div className="align-text-center">
-        <h5 className="mt-5">Нямаш акаунт?
-        <Register buttonLabel="Регистрирай се!"/></h5>
-        </div>
       </form>
 }
 

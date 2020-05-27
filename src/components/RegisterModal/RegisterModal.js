@@ -2,21 +2,22 @@ import React, { useState } from 'react'
 import {useDispatch} from 'react-redux';
 import {addUser} from '../../redux/actions';
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
 
     const dispatch = useDispatch();
-
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const dispatchAddUser = () => {
-        dispatch(addUser({
+    const dispatchAddUser = async () => {
+        await dispatch(addUser({
             username,
             email,
             userType: 'regular',
             password,
         }));
+        props.setModal(false);
+        window.location = "/";
     }
         return <form>
         <div className="form-group">

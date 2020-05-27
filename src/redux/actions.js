@@ -73,8 +73,8 @@ export const deleteGif = (variables, responseFields = "_id") => async dispatch =
 export const addUser = variables => async dispatch => {
     try {
         const response = await graphQLService.addUser(variables);
-        dispatch(getCurrentUser());
         dispatch(saveToken(response.data.addUser));
+        dispatch(getCurrentUser());
     } catch(e){
         e.graphQLErrors.forEach(error => {
             console.log(error)
