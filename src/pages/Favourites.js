@@ -7,7 +7,7 @@ import FavouriteGif from "../components/FavouriteGif";
 class Favourites extends Component {
 
     componentDidMount(){
-        this.props.getFavourites('_id title imageUrl')
+        this.props.getFavourites()
     }
     renderGifs = () => {
         const gifList = this.props.favourites.map(gif => {

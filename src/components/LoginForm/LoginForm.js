@@ -15,7 +15,7 @@ const LoginForm = (props) => {
       await dispatch (login({
           email,
           password,
-      }));      
+      }));
       props.setModal(false);
       window.location = "/";
   }

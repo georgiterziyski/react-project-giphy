@@ -32,10 +32,10 @@ export function setFavourites (gifs) {
     return {type: types.SET_FAVOURITES, payload: gifs}
 }
 
-export const getFavourites = (responseFields = "_id") => async dispatch => {
+export const getFavourites = () => async dispatch => {
     try{
-        const response = await graphQLService.getGifs(responseFields);
-        dispatch(setFavourites(response.data.gifs));
+        const response = await graphQLService.currentUser();
+        dispatch(setFavourites(response.data.currentUser.gifs));
     } catch (ex){
         dispatch(setError({message: 'There was an error!'}))
     }
@@ -91,12 +91,12 @@ export const login = variables => async dispatch => {
     } catch(e){
         e.graphQLErrors.forEach(error => {
         console.log(error)
-    })
+        })
         dispatch(setGraphQLError({request: "login", errors: []}))
     }
 }
 
-export const editUser = (variables, responseFields = "_id firstName lastName email userType, gifs") => async dispatch => {
+export const editUser = (variables, responseFields = "_id username email userType, gifs") => async dispatch => {
     try {
         graphQLService.editUser(variables, responseFields);
         dispatch(getCurrentUser());
@@ -130,7 +130,7 @@ export function saveToken(token){
     return {type: types.SAVE_TOKEN, payload: token}
 }
 
-export function deleteToken(token){
+export function deleteToken(){
     return {type: types.DELETE_TOKEN, payload: true}
 }
 

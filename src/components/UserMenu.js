@@ -11,8 +11,9 @@ const UserMenu = () => {
 
     const dispatch = useDispatch();
 
-    const dispatchLogout = () => {
-        dispatch(logout());
+    const dispatchLogout = async () => {
+       await dispatch(logout());
+       window.location = "/";
     }
     return <> <NavItem> 
             <NavLink
