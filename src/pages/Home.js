@@ -20,7 +20,7 @@ class Home extends Component {
   }
 
   findTrendingGifs = () => {
-    this.props.getGifs();
+    this.props.getGifs(2, 1);
   };
 
   changeIcon = () => {
@@ -43,7 +43,7 @@ class Home extends Component {
     if (search === "") {
       return;
     }
-    this.props.searchGifs(search);
+    this.props.searchGifs(search, 5, 0);
     this.setState({
       search: ""
     })

@@ -10,18 +10,18 @@ export function setGifs (gif) {
     return {type: types.SET_GIFS, payload: gif}
 }
 
-export const getGifs = () => async dispatch => {
+export const getGifs = (limit, offset) => async dispatch => {
     try{
-        const res = await networkClient.get("trending");
+        const res = await networkClient.get("trending", {limit, offset});
         dispatch(setGifs(res.data));
     } catch (ex){
         dispatch(setError({message: 'There was an error!'}))
     }
 };
 
-export const searchGifs = search => async dispatch => {
+export const searchGifs = (search, limit, offset) => async dispatch => {
     try{
-        const res = await networkClient.get(`search?q=${search}`);
+        const res = await networkClient.get(`search?q=${search}`, {limit, offset});
         dispatch(setGifs(res.data));
     } catch (ex){
         dispatch(setError({message: 'There was an error!'}))
