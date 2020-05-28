@@ -1,7 +1,7 @@
 .label-view{
 	color: white
 }
-.btn {
+.btn{
 	background-color: #409fc1;
 	border: 1px solid white;
 	color: white;
@@ -65,4 +65,10 @@ h1{
 }
 .fa-align-justify{
 	font-size: 20px;
+}
+
+.dropdown{
+	.btn{
+		width: 12rem
+	}
 }

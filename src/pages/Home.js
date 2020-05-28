@@ -4,14 +4,35 @@ import Gif from "../components/Gif";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as actions from "../redux/actions";
+import GifDropdown from "../components/dropdown/dropdown";
 class Home extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       search: "",
-      isToggled: false
+      isToggled: false,
+      limit: 2,
+      offset: 0
     };
+  }
+
+  setLimit = e => {
+    this.setState({
+      limit: e.target.value
+    })
+    this.resetOffset()
+  }
+
+  resetOffset = () => {
+    this.setState({
+      offset: 0
+    })
+  }
+  setOffset = e => {
+    this.setState({
+      offset: e.target.value*this.state.limit
+    })
   }
 
   componentDidMount() {
@@ -98,6 +119,9 @@ class Home extends Component {
                 <button id="button" className="btn" type="submit">
                   Search
                 </button>
+              </div>
+              <div className="col-md-3">
+                <GifDropdown/>
               </div>
               <div className="col-md-3 text-align-center">
                 <button
